@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Código Secreto Pro</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        dark: {
+                            100: '#1E293B',
+                            200: '#0F172A',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gradient-to-br from-dark-200 to-dark-100 text-white min-h-screen flex items-center justify-center font-sans">
+    <div class="w-full max-w-md p-8 space-y-8 bg-dark-100 rounded-2xl shadow-2xl border border-gray-700">
+        <h1 class="text-4xl font-bold text-center text-blue-400 mb-6">Código Secreto Pro</h1>
+        <div class="space-y-6">
+            <div class="relative">
+                <label for="code" class="block text-lg font-medium text-gray-300 mb-2">Introduzca el código:</label>
+                <input type="text" id="code" class="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200 text-lg" placeholder="Ingrese el código aquí">
+            </div>
+            <button onclick="checkCode()" class="w-full px-6 py-3 text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200 text-lg font-semibold transform hover:scale-105">
+                Verificar
+            </button>
+        </div>
+        <div id="result-container" class="mt-8 p-4 rounded-lg hidden">
+            <p id="result" class="text-center text-xl font-semibold"></p>
+        </div>
+    </div>
+
+    <script>
+        function checkCode() {
+            const code = document.getElementById('code').value;
+            const resultElement = document.getElementById('result');
+            const resultContainer = document.getElementById('result-container');
+
+            resultContainer.classList.remove('hidden', 'bg-green-800', 'bg-red-800', 'bg-yellow-800');
+            
+            if (code === '935129263747') {
+                showResult('+ - -', 'bg-green-800');
+            } else if (code === '631') {
+                showResult('de abajo a arriba', 'bg-green-800');
+            } else if (code === '231') {
+                showResult('sube el brillo', 'bg-yellow-800');
+            } else {
+                showResult('Código incorrecto. Inténtelo otra vez.', 'bg-red-800');
+            }
+        }
+
+        function showResult(message, bgClass) {
+            const resultElement = document.getElementById('result');
+            const resultContainer = document.getElementById('result-container');
+
+            resultElement.textContent = message;
+            resultContainer.classList.remove('hidden');
+            resultContainer.classList.add(bgClass);
+
+            resultContainer.style.opacity = '0';
+            resultContainer.style.transform = 'translateY(-20px)';
+            setTimeout(() => {
+                resultContainer.style.transition = 'opacity 0.5s, transform 0.5s';
+                resultContainer.style.opacity = '1';
+                resultContainer.style.transform = 'translateY(0)';
+            }, 50);
+        }
+    </script>
+</body>
+</html>
